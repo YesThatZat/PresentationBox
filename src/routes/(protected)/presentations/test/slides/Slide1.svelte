@@ -16,3 +16,8 @@
 	</div>
 </div>
 
+<style>
+	.slide {
+		background-color: rgb(151, 198, 228);
+	}
+</style>

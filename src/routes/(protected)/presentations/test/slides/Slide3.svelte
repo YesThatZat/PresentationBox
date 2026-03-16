@@ -16,3 +16,8 @@
 	</div>
 </div>
 
+<style>
+	.slide {
+		background: color-mix(in srgb, var(--background) 30%, rgb(235, 242, 189));
+	}
+</style>

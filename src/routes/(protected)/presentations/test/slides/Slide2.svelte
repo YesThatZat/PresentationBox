@@ -15,3 +15,9 @@
 		<TestSlideTitle {isActive} title={"Two"} />
 	</div>
 </div>
+
+<style>
+	.slide {
+		background-color: thistle;
+	}
+</style>

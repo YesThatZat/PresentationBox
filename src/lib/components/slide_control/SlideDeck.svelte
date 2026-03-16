@@ -4,9 +4,10 @@
 
 	type Props = {
 		slides: SlideEntry[];
+		showDebugNavigation?: boolean
 	};
 
-	let { slides }: Props = $props();
+	let { slides, showDebugNavigation = true }: Props = $props();
 
 	let index = $state(0);
 	let direction = $state<Direction>(null);
@@ -31,6 +32,7 @@
 </script>
 
 <div class="slide-deck">
+	{#if showDebugNavigation}
 	<div class="controls">
 		<button onclick={goPrev} disabled={direction !== null || index <= 0}>Prev</button>
 		<button onclick={goNext} disabled={direction !== null || index >= slides.length - 1}
@@ -41,6 +43,7 @@
 			<span>Diagnostics</span>
 		</div>
 	</div>
+	{/if}
 
 	<div class="viewport">
 		<SlideAnimator
@@ -50,7 +53,14 @@
 			{direction}
 			onTransitionEnd={handleTransitionEnd}
 		/>
+		<button class="band back-band" onclick={goPrev} disabled={direction !== null || index <= 0}>
+			<span>&lt;</span>
+		</button>
+		<button class="band forward-band" onclick={goNext} disabled={direction !== null || index >= slides.length - 1}>
+			<span>&gt;</span>
+		</button>
 	</div>
+
 </div>
 
 <style>
@@ -78,5 +88,38 @@
 
 	.right-align {
 		margin-left: auto;
+	}
+
+	.band {
+		z-index: 9999;
+		height: 100%;
+		width: 6em;
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+		justify-content: center;
+		align-items: center;
+		font-size: large;
+		background-color: rgb(179, 255, 255);
+		mix-blend-mode:multiply;
+		opacity: 0;
+		transition: opacity 0.12s ease-in-out;
+	}
+
+	.back-band {
+		position: absolute;
+		left:0;
+		top:0;
+	}
+
+	.forward-band {
+		position: absolute;
+		right:0;
+		top:0;
+	}
+
+	.band:hover {
+		background-color: rgb(179, 255, 255);
+		opacity: 1;
 	}
 </style>

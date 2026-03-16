@@ -16,3 +16,10 @@
 	</div>
 </div>
 
+<style>
+	.slide {
+		/* CSS may be hard, but never forget life is harder */
+		background-color: rebeccapurple;
+		color: white;
+	}
+</style>
