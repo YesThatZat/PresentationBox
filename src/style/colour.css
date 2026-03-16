@@ -1,0 +1,13 @@
+:root {
+	--brand-primary: #52489c;
+	--brand-secondary: #4062bb;
+	--brand-tertiary: #59c3c3;
+	--brand-quaternary: #ebebeb;
+	--branch-quinary: #f45b69;
+
+	--background: #f1f2f6;
+	--foreground: #362e3d;
+
+	--heading: var(--brand-primary);
+	--text: var(--background);
+}

@@ -1,0 +1,322 @@
+/* ==========================================================================
+   CSS Reset for Modern Browsers
+   ========================================================================== */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* Remove default margin and padding */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+	list-style: none;
+}
+
+/* Remove list styles on all lists */
+ul,
+ol,
+li {
+	list-style: none;
+}
+
+/* Set core root defaults */
+html {
+	line-height: 1.5;
+	-webkit-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+	tab-size: 4;
+}
+
+html:focus-within {
+	scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+	min-height: 100vh;
+	text-rendering: optimizeSpeed;
+	line-height: 1.5;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+}
+
+/* Reset headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+}
+
+/* Reset text elements */
+p,
+span,
+div,
+section,
+article,
+aside,
+nav,
+header,
+footer,
+main {
+	font-size: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+	text-decoration-skip-ink: auto;
+}
+
+/* Reset all links */
+a {
+	background-color: transparent;
+	color: inherit;
+	text-decoration: inherit;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+/* Reset form elements */
+input,
+button,
+textarea,
+select {
+	font: inherit;
+	color: inherit;
+	background: transparent;
+	border: none;
+	outline: none;
+	padding: 0;
+	margin: 0;
+}
+
+/* Remove default button styles */
+button {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+}
+
+/* Remove default fieldset styles */
+fieldset {
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* Remove default legend styles */
+legend {
+	padding: 0;
+}
+
+/* Reset table elements */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+td,
+th {
+	padding: 0;
+	text-align: left;
+}
+
+/* Remove default blockquote styles */
+blockquote,
+q {
+	quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: '';
+	content: none;
+}
+
+/* Reset HTML5 display-role for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+	display: block;
+}
+
+/* Remove default styles for abbr */
+abbr[title] {
+	border-bottom: none;
+	text-decoration: none;
+}
+
+/* Reset emphasis elements */
+b,
+strong {
+	font-weight: inherit;
+}
+
+em,
+i {
+	font-style: inherit;
+}
+
+/* Reset code elements */
+code,
+kbd,
+samp,
+pre {
+	font-family: inherit;
+	font-size: inherit;
+}
+
+/* Reset small element */
+small {
+	font-size: inherit;
+}
+
+/* Reset sub and sup elements */
+sub,
+sup {
+	font-size: inherit;
+	line-height: 0;
+	position: relative;
+	vertical-baseline: baseline;
+}
+
+/* Reset hr element */
+hr {
+	border: none;
+	height: 0;
+	color: inherit;
+	border-top: 1px solid;
+}
+
+/* Reset template element */
+template {
+	display: none;
+}
+
+/* Reset hidden attribute */
+[hidden] {
+	display: none;
+}
+
+/* Reset focus styles - you can customize these later */
+:focus {
+	outline: none;
+}
+
+/* Reset selection styles */
+::selection {
+	background: transparent;
+}
+
+::-moz-selection {
+	background: transparent;
+}
+
+/* Remove default appearance for form elements */
+input[type='search'] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
+	-webkit-appearance: none;
+}
+
+/* Remove default number input spinners */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type='number'] {
+	-moz-appearance: textfield;
+}
+
+/* Remove default textarea resize */
+textarea {
+	resize: none;
+}
+
+/* Reset progress element */
+progress {
+	vertical-align: baseline;
+}
+
+/* Reset summary element */
+summary {
+	display: list-item;
+}
+
+/* Reset dialog element */
+dialog {
+	background-color: transparent;
+	border: none;
+	color: inherit;
+	display: block;
+	height: auto;
+	left: auto;
+	margin: 0;
+	padding: 0;
+	position: static;
+	right: auto;
+	top: auto;
+	width: auto;
+}
+
+/* Media query for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	html:focus-within {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}

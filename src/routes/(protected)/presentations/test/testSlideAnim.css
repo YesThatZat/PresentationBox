@@ -1,0 +1,38 @@
+.slide {
+    width: 100%;
+    height: 100%;
+    background: color-mix(in srgb, var(--background) 30%, rgb(235, 242, 189));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    transition:
+        transform 2s ease,
+        opacity 2s;
+    }
+    
+.title.before {
+    /* Delay opacity so the fade occurs after the element enters the viewport. */
+    transition:
+        transform 2s ease,
+        opacity 1s ease 1s;
+    transform: translateY(-500px);
+    opacity: 0;
+}
+
+.title.before.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.title.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.title.out {
+    transform: translateY(500px);
+    opacity: 0;
+}

@@ -1,0 +1,6 @@
+@import './style/reset.css';
+@import './style/colour.css';
+
+body {
+    font-family: 'Helvetica', 'Courier New', Courier, monospace;
+}
