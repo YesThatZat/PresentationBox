@@ -8,15 +8,15 @@
 
 .title {
     transition:
-        transform 2s ease,
-        opacity 2s;
+        transform 1.33s ease,
+        opacity 1.33s;
     }
     
 .title.before {
     /* Delay opacity so the fade occurs after the element enters the viewport. */
     transition:
-        transform 2s ease,
-        opacity 1s ease 1s;
+        transform 1s ease 0.9s,
+        opacity 0.66s ease 0.33s;
     transform: translateY(-500px);
     opacity: 0;
 }

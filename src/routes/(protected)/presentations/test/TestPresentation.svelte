@@ -1,5 +1,5 @@
 <script lang="ts">
-	import './testSlideAnim.css'
+	import './Slide.css'
 	import type { SlideEntry } from '$lib/components/slide_control/slide';
 	import SlideDeck from '$lib/components/slide_control/SlideDeck.svelte';
 
@@ -16,7 +16,7 @@
 	];
 </script>
 
-<SlideDeck {slides} />
+<SlideDeck {slides} showDebugNavigation={true} />
 
 <style>
 	:global(.slide) {

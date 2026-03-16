@@ -8,7 +8,7 @@
 		showDebugNavigation?: boolean;
 	};
 
-	let { slides, showDebugNavigation = true }: Props = $props();
+	let { slides, showDebugNavigation = false }: Props = $props();
 
 	let index = $state(0);
 	let direction = $state<Direction>(null);
