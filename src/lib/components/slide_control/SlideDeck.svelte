@@ -1,10 +1,11 @@
 <script lang="ts">
 	import SlideAnimator from './SlideAnimator.svelte';
 	import type { Direction, SlideEntry } from './slide';
+	import { onMount } from 'svelte';
 
 	type Props = {
 		slides: SlideEntry[];
-		showDebugNavigation?: boolean
+		showDebugNavigation?: boolean;
 	};
 
 	let { slides, showDebugNavigation = true }: Props = $props();
@@ -12,37 +13,85 @@
 	let index = $state(0);
 	let direction = $state<Direction>(null);
 
+	function finishTransition() {
+		if (direction === 'next' && index < slides.length - 1) {
+			index += 1;
+		} else if (direction === 'prev' && index > 0) {
+			index -= 1;
+		}
+
+		direction = null;
+	}
+
+	function cancelTransition() {
+		direction = null;
+	}
+
 	function goNext() {
-		if (direction) return;
+		if (direction === 'next') {
+			// Same direction clicked again:
+			// make the incoming slide the current slide immediately
+			finishTransition();
+			return;
+		}
+
+		if (direction === 'prev') {
+			// Opposite direction clicked:
+			// abandon the in-progress transition and snap back
+			cancelTransition();
+			return;
+		}
+
 		if (index >= slides.length - 1) return;
 		direction = 'next';
 	}
 
 	function goPrev() {
-		if (direction) return;
+		if (direction === 'prev') {
+			// Same direction clicked again:
+			// make the incoming slide the current slide immediately
+			finishTransition();
+			return;
+		}
+
+		if (direction === 'next') {
+			// Opposite direction clicked:
+			// abandon the in-progress transition and snap back
+			cancelTransition();
+			return;
+		}
+
 		if (index <= 0) return;
 		direction = 'prev';
 	}
 
 	function handleTransitionEnd() {
-		if (direction === 'next') index += 1;
-		if (direction === 'prev') index -= 1;
-		direction = null;
+		finishTransition();
 	}
+
+	onMount(() => {
+		const handler = (e: KeyboardEvent) => {
+			if (e.key === 'ArrowRight') goNext();
+			if (e.key === 'ArrowLeft') goPrev();
+		};
+
+		window.addEventListener('keydown', handler);
+		return () => window.removeEventListener('keydown', handler);
+	});
 </script>
 
 <div class="slide-deck">
 	{#if showDebugNavigation}
-	<div class="controls">
-		<button onclick={goPrev} disabled={direction !== null || index <= 0}>Prev</button>
-		<button onclick={goNext} disabled={direction !== null || index >= slides.length - 1}
-			>Next</button
-		>
+		<div class="controls">
+			<button onclick={goPrev} disabled={index <= 0 && direction === null}>Prev</button>
+			<button onclick={goNext} disabled={index >= slides.length - 1 && direction === null}>
+				Next
+			</button>
 
-		<div class="right-align">
-			<span>Diagnostics</span>
+			<div class="right-align">
+				<span>Diagnostics</span>
+			</div>
 		</div>
-	</div>
 	{/if}
 
 	<div class="viewport">
@@ -53,14 +102,19 @@
 			{direction}
 			onTransitionEnd={handleTransitionEnd}
 		/>
-		<button class="band back-band" onclick={goPrev} disabled={direction !== null || index <= 0}>
+
+		<button class="band back-band" onclick={goPrev} disabled={index <= 0 && direction === null}>
 			<span>&lt;</span>
 		</button>
-		<button class="band forward-band" onclick={goNext} disabled={direction !== null || index >= slides.length - 1}>
+
+		<button
+			class="band forward-band"
+			onclick={goNext}
+			disabled={index >= slides.length - 1 && direction === null}
+		>
 			<span>&gt;</span>
 		</button>
 	</div>
-
 </div>
 
 <style>
@@ -101,21 +155,21 @@
 		align-items: center;
 		font-size: large;
 		background-color: rgb(179, 255, 255);
-		mix-blend-mode:multiply;
+		mix-blend-mode: multiply;
 		opacity: 0;
 		transition: opacity 0.12s ease-in-out;
 	}
 
 	.back-band {
 		position: absolute;
-		left:0;
-		top:0;
+		left: 0;
+		top: 0;
 	}
 
 	.forward-band {
 		position: absolute;
-		right:0;
-		top:0;
+		right: 0;
+		top: 0;
 	}
 
 	.band:hover {
