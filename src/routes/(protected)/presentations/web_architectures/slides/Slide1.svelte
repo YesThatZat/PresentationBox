@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { SlideProps } from '$lib/components/slide_control/slide';
-	import TestSlideTitle from './TestSlideTitle.svelte';
+	import Title from './Slide_01/Title.svelte';
 
 	let { phase = 'before', isActive = false }: SlideProps = $props();
 </script>
@@ -12,7 +12,7 @@
 		class:active={phase === 'active'}
 		class:out={phase === 'out'}
 	>
-		<TestSlideTitle {isActive} title={"One"} />
+	<Title {isActive} title="Web Architecture"></Title>
 	</div>
 </div>
 
