@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Presentation from "../Presentation.svelte";
+	import Presentation from "$lib/components/presentation/Presentation.svelte";
 
     import Slide1 from "./slides/Slide1.svelte";
     import Slide2 from "./slides/Slide2.svelte";

@@ -1,4 +1,3 @@
-// slideUtils.ts
 import type { PresentationComponentEventHandler } from '$lib/components/presentation/presentationComponent';
 
 export type SlideDirection = 'idle' | 'in' | 'out' | 'forward' | 'backward';

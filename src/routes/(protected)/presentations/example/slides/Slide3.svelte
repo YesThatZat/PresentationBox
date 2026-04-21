@@ -1,6 +1,8 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import type { PresentationComponentProps } from '$lib/components/presentation/presentationComponent';
-	import { createSlideController } from '../../slideUtils.svelte';
+	import { createSlideController } from '$lib/components/presentation/slideUtils.svelte';
+	import { createSlidePreloader } from '$lib/components/presentation/slidePreload.svelte';
 
 	let { onIdle, onNoNextStep, onNoPrevStep }: PresentationComponentProps = $props();
 
@@ -9,6 +11,15 @@
 		onIdle: () => onIdle?.(),
 		onNoNextStep: () => onNoNextStep?.(),
 		onNoPrevStep: () => onNoPrevStep?.()
+	});
+
+	const preloader = createSlidePreloader(async () => {
+		// Placeholder for real preload work
+		await Promise.resolve();
+	});
+
+	onMount(() => {
+		void preloader.runPreload();
 	});
 
 	export const slide_in = slide.slide_in;
@@ -21,16 +32,23 @@
 	export const outNow = slide.outNow;
 </script>
 
-{#if slide.visible}
-	<div
-		class="centre"
-		class:anim-in={slide.animating && slide.direction === 'in'}
-		class:anim-out={slide.animating && slide.direction === 'out'}
-		onanimationend={slide.handleAnimationEnd}
-	>
+<div
+	class="slide-root"
+	class:is-visible={slide.visible}
+	class:anim-in={slide.animating && slide.direction === 'in'}
+	class:anim-out={slide.animating && slide.direction === 'out'}
+	onanimationend={slide.handleAnimationEnd}
+>
+	<div class="centre">
 		<h1>Slide Three</h1>
 
+		<p>Preload status: {preloader.preloadStatus}</p>
+
 		<p>Step 1: intro content</p>
+
+		{#if preloader.preloadError}
+			<p>Preload failed.</p>
+		{/if}
 
 		{#if slide.step >= 1}
 			<div class="reveal">
@@ -38,9 +56,23 @@
 			</div>
 		{/if}
 	</div>
-{/if}
+</div>
 
 <style>
+	.slide-root {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.slide-root.is-visible {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
 	.centre {
 		width: 100%;
 		height: 100%;
