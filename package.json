@@ -55,5 +55,10 @@
 		"vite": "^7.3.1",
 		"vite-plugin-devtools-json": "^1.0.0",
 		"vitest": "^4.1.0"
+	},
+	"dependencies": {
+		"graphology": "^0.26.0",
+		"pino": "^10.3.1",
+		"sigma": "^3.0.2"
 	}
 }

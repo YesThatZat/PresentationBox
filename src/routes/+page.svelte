@@ -1,6 +1,7 @@
 <div>
     <h1>Oh look, links</h1>
     <a href="/presentations/test">Test Presentation</a>
+    <a href="/presentations/test2">Test Presentation</a>
     <a href="/presentations/web_architectures">Web Software Architectures</a>
 </div>
 
