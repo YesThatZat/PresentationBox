@@ -3,18 +3,18 @@
 	import type { PresentationComponentProps } from '$lib/components/presentation/presentationComponent';
 	import { createSlideController } from '$lib/components/presentation/slideUtils.svelte';
 	import { createSlidePreloader } from '$lib/components/presentation/slidePreload.svelte';
+	import InteractiveSigmaGraph from '$lib/components/interactiveSigmaGraph/InteractiveSigmaGraph.svelte';
 
 	let { onIdle, onNoNextStep, onNoPrevStep }: PresentationComponentProps = $props();
 
 	const slide = createSlideController({
-		lastStep: 1,
+		lastStep: 0,
 		onIdle: () => onIdle?.(),
 		onNoNextStep: () => onNoNextStep?.(),
 		onNoPrevStep: () => onNoPrevStep?.()
 	});
 
 	const preloader = createSlidePreloader(async () => {
-		// Placeholder for real preload work
 		await Promise.resolve();
 	});
 
@@ -42,18 +42,12 @@
 	<div class="centre">
 		<h1>Slide Four</h1>
 
-		<p>Preload status: {preloader.preloadStatus}</p>
-
-		<p>Step 1: intro content</p>
+		<div class="tilted-graph">
+			<InteractiveSigmaGraph />
+		</div>
 
 		{#if preloader.preloadError}
 			<p>Preload failed.</p>
-		{/if}
-
-		{#if slide.step >= 1}
-			<div class="reveal">
-				<p>Step 2: revealed content</p>
-			</div>
 		{/if}
 	</div>
 </div>
@@ -81,6 +75,30 @@
 		align-items: center;
 		justify-content: center;
 		gap: 1rem;
+		min-height: 0;
+	}
+
+	.tilted-graph {
+		width: 100%;
+		flex: 1;
+		min-height: 0;
+		perspective: 1100px;
+		overflow: hidden;
+	}
+
+	.tilted-graph :global(.sigma-graph) {
+		width: 100%;
+		height: 100%;
+	}
+
+	.tilted-graph :global(.sigma-container) {
+		width: 100%;
+		height: 100%;
+		transform-origin: center;
+		transform-style: preserve-3d;
+		will-change: transform;
+		pointer-events: none;
+		animation: spin-tilted-graph 14s linear infinite;
 	}
 
 	.anim-in {
@@ -95,11 +113,22 @@
 		animation: reveal-in 400ms ease;
 	}
 
+	@keyframes spin-tilted-graph {
+		from {
+			transform: rotateX(58deg) rotateZ(0turn) scale(0.82);
+		}
+
+		to {
+			transform: rotateX(58deg) rotateZ(1turn) scale(0.82);
+		}
+	}
+
 	@keyframes slide-in {
 		from {
 			opacity: 0;
 			transform: translateX(3rem);
 		}
+
 		to {
 			opacity: 1;
 			transform: translateX(0);
@@ -111,6 +140,7 @@
 			opacity: 1;
 			transform: translateX(0);
 		}
+
 		to {
 			opacity: 0;
 			transform: translateX(-3rem);
@@ -122,9 +152,17 @@
 			opacity: 0;
 			transform: translateY(1rem);
 		}
+
 		to {
 			opacity: 1;
 			transform: translateY(0);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.tilted-graph :global(.sigma-container) {
+			animation: none;
+			transform: rotateX(58deg) rotateZ(-10deg) scale(0.82);
 		}
 	}
 </style>

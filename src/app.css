@@ -1,6 +1,11 @@
 @import './style/reset.css';
 @import './style/colour.css';
 
+:root {
+    --color-transportcontrol-background: rgb(153 184 231 / 70%);
+    --color-transportcontrol-foreground: #1f6feb;
+}
+
 body {
     font-family: 'Helvetica', 'Courier New', Courier, monospace;
 }

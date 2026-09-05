@@ -1,5 +1,5 @@
 <script lang="ts">
-	import BackgroundImage from "$lib/components/text/BackgroundImage.svelte";
+	import BackgroundImage from "$lib/components/images/BackgroundImage.svelte";
 	import DelayedReveal from "$lib/components/text/DelayedReveal.svelte";
 	import TitleFan from "$lib/components/text/TitleFan.svelte";
 
